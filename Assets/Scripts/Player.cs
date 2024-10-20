@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] GameInput gameInput;
     [SerializeField] float moveSpeed = 7f;
-    private const string ROCK = "Rock";
+    private const string CANNON_BALL = "Cannon Ball";
 
     private void Update()
     {
@@ -19,9 +19,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(ROCK))
+        if (collision.gameObject.CompareTag(CANNON_BALL))
         {
-            Debug.Log("Столкновение с камнем, конец игры");
+            Debug.Log("Столкновение со снарядом, конец игры");
             DefeatHandle();
         }
     }

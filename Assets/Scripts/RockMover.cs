@@ -15,7 +15,7 @@ public class RockMover : MonoBehaviour
 
     private void Update()
     {
-        rb.AddForce(Vector3.back * rockMoveSpeed * Time.deltaTime, ForceMode.Impulse);
+        rb.AddForce(Vector3.back * rockMoveSpeed, ForceMode.Impulse);
         if (rb.position.y < 0)
         {
             Destroy(rb.gameObject);
