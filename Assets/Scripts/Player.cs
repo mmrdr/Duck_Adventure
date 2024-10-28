@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
 {
     [SerializeField] GameInput gameInput;
     [SerializeField] float moveSpeed = 7f;
+    private bool isWalking;
     private const string CANNON_BALL = "Cannon Ball";
+    private const string WATER = "Water";
 
     private void Update()
     {
@@ -24,6 +26,10 @@ public class Player : MonoBehaviour
             Debug.Log("—толкновение со снар€дом, конец игры");
             DefeatHandle();
         }
+        if (collision.gameObject.CompareTag(WATER))
+        {
+            Debug.Log("я боюсь воды!");
+        }
     }
 
     private void HandlePlayerMovement()
@@ -31,8 +37,9 @@ public class Player : MonoBehaviour
         Vector2 input = gameInput.GetInputVectorNormalized();
         Vector3 moveDirection = new Vector3(input.x, 0f, input.y);
         float moveDistance = moveSpeed * Time.deltaTime;
+        isWalking = moveDirection != Vector3.zero;
         float playerHeight = 1f;
-        float playerRadius = 0.25f;
+        float playerRadius = 0.15f;
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirection, moveDistance);
         if (!canMove)
         {
@@ -61,7 +68,7 @@ public class Player : MonoBehaviour
             transform.position += moveDirection * moveDistance;
         }
 
-
+        
         float rotationSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, rotationSpeed * Time.deltaTime);
     }
@@ -78,4 +85,6 @@ public class Player : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public bool IsWalking() => isWalking;
 }

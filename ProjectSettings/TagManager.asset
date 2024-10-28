@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Rock
   - Cannon Ball
+  - CloseFence
+  - Water
+  - Cannon
   layers:
   - Default
   - TransparentFX
