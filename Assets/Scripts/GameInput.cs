@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GameInput : MonoBehaviour
 {
+    [SerializeField] private GameStartedUI gameStartedUI;
     private PlayerInputActions inputAction;
-
+    
     public void Awake()
     {
         inputAction = new PlayerInputActions();
@@ -21,6 +22,7 @@ public class GameInput : MonoBehaviour
     public bool IsEscapePressed()
     {
         bool isEscapePresed = inputAction.Player.Menu.WasPressedThisFrame();
-        return isEscapePresed;
+        Debug.Log(isEscapePresed && gameStartedUI.CanPress());
+        return (isEscapePresed && gameStartedUI.CanPress());
     }
 }

@@ -8,6 +8,8 @@ public class GameStartedUI : MonoBehaviour
     [SerializeField] private GameObject countDownObject;
     private TextMeshProUGUI countDownText;
 
+    private bool canPress = false;
+
     private void Awake()
     {
         countDownObject.SetActive(true);
@@ -27,5 +29,8 @@ public class GameStartedUI : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         countDownObject.SetActive(false);
         Time.timeScale = 1f;
+        canPress = true;
     }
+
+    public bool CanPress() => canPress;
 }

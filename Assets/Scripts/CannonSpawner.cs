@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CannonSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject cannon;
     [SerializeField] private GameObject shootPoint;
+    [SerializeField] private GameObject playerScoreObject;
+    private TextMeshProUGUI playerScoreText;
     private float radius = 9.5f;
     private int cannonAmount = 1;
     private Vector3 center = new Vector3(1.24f, 0.75f, -0.2f);
@@ -18,6 +21,12 @@ public class CannonSpawner : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        playerScoreObject.SetActive(true);
+        playerScoreText = playerScoreObject.GetComponent<TextMeshProUGUI>();
+    }
+
     private void Start()
     {
         StartCoroutine(CannonSpawn());
@@ -27,9 +36,10 @@ public class CannonSpawner : MonoBehaviour
     {
         while(true)
         {
+            UpdateScore();
             Spawn(cannonAmount);
             yield return new WaitForSeconds(2f);
-            DestroyCannons();
+            DestroyCannons();      
             ++cannonAmount;
         }
     }
@@ -55,5 +65,10 @@ public class CannonSpawner : MonoBehaviour
         {
             Destroy(cannon);
         }
+    }
+
+    private void UpdateScore()
+    {
+        playerScoreText.text = "Wave: " + cannonAmount + " cannons";
     }
 }
