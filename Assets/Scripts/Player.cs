@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -8,11 +9,13 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] GameInput gameInput;
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private InGameMenuUI gameMenuUI;
     [SerializeField] float moveSpeed = 7f;
     private bool isWalking;
     private const string CANNON_BALL = "Cannon Ball";
-    private const string WATER = "Water";
+
+    public event EventHandler OnCannonBallHit;
 
     private void Update()
     {
@@ -23,12 +26,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(CANNON_BALL))
         {
-            Debug.Log("—толкновение со снар€дом, конец игры");
-            DefeatHandle();
-        }
-        if (collision.gameObject.CompareTag(WATER))
-        {
-            Debug.Log("я боюсь воды!");
+            OnCannonBallHit?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -71,19 +69,6 @@ public class Player : MonoBehaviour
         
         float rotationSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, rotationSpeed * Time.deltaTime);
-    }
-
-    private void DefeatHandle()
-    {
-        Time.timeScale = 0f;
-        StartCoroutine(RestartLevel(2f));
-    }
-
-    private IEnumerator RestartLevel(float delay)
-    {
-        yield return new WaitForSecondsRealtime(delay);
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public bool IsWalking() => isWalking;

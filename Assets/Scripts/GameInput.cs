@@ -17,4 +17,10 @@ public class GameInput : MonoBehaviour
         Vector2 input = inputAction.Player.Move.ReadValue<Vector2>().normalized;
         return input;
     }
+
+    public bool IsEscapePressed()
+    {
+        bool isEscapePresed = inputAction.Player.Menu.WasPressedThisFrame();
+        return isEscapePresed;
+    }
 }

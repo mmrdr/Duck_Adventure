@@ -14,4 +14,15 @@ public class CannonBall : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Awake()
+    {
+        StartCoroutine(DestroyAfterThreeSeconds());
+    }
+
+    private IEnumerator DestroyAfterThreeSeconds()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+    }
 }
