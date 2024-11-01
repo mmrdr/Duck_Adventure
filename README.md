@@ -1,0 +1,4 @@
+# ***Duck Adventure First MiniGame***
+## The first of 10 mini-games about a fictional character - genius, billionaire, playboy, philanthropist - Duck.
+In this mini-game, a duck gets into trouble, he finds himself on a desert island in the middle of the ocean. And how did he even end up there! There are only rocks and water around! He needs to deftly dodge the terrible pirate guns (which inexplicably appear on this lonely island). Better sit down, because even Hollywood movies will envy this scene of dodging projectiles!
+### ***If you want to contact me*** [TG] (https://t.me/mmrdrrr) [Mail] (xmrdrx@yandex.ru)
