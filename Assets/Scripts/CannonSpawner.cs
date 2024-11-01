@@ -8,9 +8,10 @@ public class CannonSpawner : MonoBehaviour
     [SerializeField] private GameObject cannon;
     [SerializeField] private GameObject shootPoint;
     [SerializeField] private GameObject playerScoreObject;
+    [SerializeField] private DefeatMenuUI defeatUI;
     private TextMeshProUGUI playerScoreText;
     private float radius = 9.5f;
-    private int cannonAmount = 1;
+    private int cannonAmount = 0;
     private Vector3 center = new Vector3(1.24f, 0.75f, -0.2f);
 
     private void Update()
@@ -23,8 +24,14 @@ public class CannonSpawner : MonoBehaviour
 
     private void Awake()
     {
+        defeatUI.OnDefeatHandler += CannonSpawner_OnDefeatHandler;
         playerScoreObject.SetActive(true);
         playerScoreText = playerScoreObject.GetComponent<TextMeshProUGUI>();
+    }
+
+    private void CannonSpawner_OnDefeatHandler(object sender, System.EventArgs e)
+    {
+        playerScoreObject.SetActive(false);
     }
 
     private void Start()
@@ -70,5 +77,8 @@ public class CannonSpawner : MonoBehaviour
     private void UpdateScore()
     {
         playerScoreText.text = "Wave: " + cannonAmount + " cannons";
+        CalculateRecord.UpdateHighScore(cannonAmount);
     }
+
+    public int CannonCount() => cannonAmount;
 }

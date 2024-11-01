@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameStartedUI : MonoBehaviour
 {
     [SerializeField] private GameObject countDownObject;
+    [SerializeField] private AudioSource countDownAudio;
     private TextMeshProUGUI countDownText;
 
     private bool canPress = false;

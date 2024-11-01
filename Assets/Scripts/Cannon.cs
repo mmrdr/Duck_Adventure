@@ -9,7 +9,8 @@ using UnityEngine.UIElements;
 public class Cannon : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject ballPrefab; 
+    [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private AudioSource cannonShootAudio;
     private float cannonBallSpeed = 10f;
 
     private void Start()
@@ -29,6 +30,7 @@ public class Cannon : MonoBehaviour
 
     private void Shoot()
     {
+        cannonShootAudio.Play();
         GameObject cannonBall = Instantiate(ballPrefab, firePoint.position, firePoint.rotation);
         Rigidbody rb = cannonBall.GetComponent<Rigidbody>();
         rb.velocity = firePoint.forward * cannonBallSpeed;

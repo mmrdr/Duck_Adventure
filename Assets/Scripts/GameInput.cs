@@ -22,7 +22,6 @@ public class GameInput : MonoBehaviour
     public bool IsEscapePressed()
     {
         bool isEscapePresed = inputAction.Player.Menu.WasPressedThisFrame();
-        Debug.Log(isEscapePresed && gameStartedUI.CanPress());
         return (isEscapePresed && gameStartedUI.CanPress());
     }
 }

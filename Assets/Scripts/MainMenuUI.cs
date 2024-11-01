@@ -9,11 +9,14 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private AudioSource menuAudio;
 
     private void Awake()
     {
+        menuAudio.Play();
         playButton.onClick.AddListener(() =>
         {
+            menuAudio.Stop();
             SceneManager.LoadScene(1);
         });
         quitButton.onClick.AddListener(() =>
