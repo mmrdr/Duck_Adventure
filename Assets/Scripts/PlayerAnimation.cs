@@ -7,6 +7,7 @@ public class Animation : MonoBehaviour
     [SerializeField] private Player player;
     private Animator animator;
     private const string IS_WALKING = "IsWalking";
+    private const string IS_INTERACTED_WITH_PORTAL = "IsInteractedWithPortal";
 
     private void Awake()
     {
@@ -16,5 +17,6 @@ public class Animation : MonoBehaviour
     private void Update()
     {
         animator.SetBool(IS_WALKING, player.IsWalking());
+        animator.SetBool(IS_INTERACTED_WITH_PORTAL, player.IsInteractedWithPortal());
     }
 }

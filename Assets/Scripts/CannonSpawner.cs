@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,6 +14,8 @@ public class CannonSpawner : MonoBehaviour
     private float radius = 9.5f;
     private int cannonAmount = 0;
     private Vector3 center = new Vector3(1.24f, 0.75f, -0.2f);
+
+    public event EventHandler OnPlayerWinEvent;
 
     private void Update()
     {
@@ -41,7 +44,7 @@ public class CannonSpawner : MonoBehaviour
 
     IEnumerator CannonSpawn()
     {
-        while(true)
+        while(cannonAmount <= 7)
         {
             UpdateScore();
             Spawn(cannonAmount);
@@ -49,6 +52,7 @@ public class CannonSpawner : MonoBehaviour
             DestroyCannons();      
             ++cannonAmount;
         }
+        OnPlayerWinEvent?.Invoke(this, EventArgs.Empty);
     }
 
     private void Spawn(int count)
@@ -68,9 +72,12 @@ public class CannonSpawner : MonoBehaviour
 
     private void DestroyCannons()
     {
-        foreach (GameObject cannon in GameObject.FindGameObjectsWithTag("Cannon"))
+        if (cannonAmount <= 7)
         {
-            Destroy(cannon);
+            foreach (GameObject cannon in GameObject.FindGameObjectsWithTag("Cannon"))
+            {
+                Destroy(cannon);
+            }
         }
     }
 

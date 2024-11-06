@@ -9,6 +9,7 @@ TagManager:
   - CloseFence
   - Water
   - Cannon
+  - Portal
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Portal
+  - Player
   - 
   - 
   - 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,18 @@ public class GameInput : MonoBehaviour
 {
     [SerializeField] private GameStartedUI gameStartedUI;
     private PlayerInputActions inputAction;
+    public event EventHandler OnInteractPerformed;
     
     public void Awake()
     {
         inputAction = new PlayerInputActions();
         inputAction.Player.Enable();
+        inputAction.Player.Interact.performed += Interact_performed;
+    }
+
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInteractPerformed?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetInputVectorNormalized()
